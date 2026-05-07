@@ -265,7 +265,7 @@ export default function CompanyDetails() {
         <div className="empty-state">
           <h3>No reviews yet</h3>
           <p>Be the first to share your experience with {company.name}.</p>
-          <button className="btn-purple" onClick={() => setShowAdd(true)}>+ Add Review</button>
+          <button className="btn-purple1" onClick={() => setShowAdd(true)}>+ Add Review</button>
         </div>
       ) : (
         <div className="review-list">
