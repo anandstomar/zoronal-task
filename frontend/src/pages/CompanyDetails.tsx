@@ -64,7 +64,7 @@ function StarPicker({ value, onChange }: { value: number; onChange: (n: number) 
           aria-label={`${n} star${n > 1 ? 's' : ''}`}
         >
           <span style={{
-            fontSize: 50,
+            fontSize: 45,
             color: n <= (hovered || value) ? 'var(--star-filled)' : 'var(--star-empty)',
             transition: 'color 0.15s'
           }}>★</span>
@@ -75,7 +75,7 @@ function StarPicker({ value, onChange }: { value: number; onChange: (n: number) 
 }
 
 function AddReviewModal({ companyId, onClose, onSaved }: { companyId: string; onClose: () => void; onSaved: () => void }) {
-  const [form, setForm] = useState({ fullName: '', reviewText: '', rating: 5 });
+  const [form, setForm] = useState({ fullName: '', subject: '', reviewText: '', rating: 5 });
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState('');
 
@@ -106,6 +106,12 @@ function AddReviewModal({ companyId, onClose, onSaved }: { companyId: string; on
               <input id="review-name" type="text" className="form-control" required
                 placeholder="Your full name"
                 value={form.fullName} onChange={e => setForm(p => ({ ...p, fullName: e.target.value }))} />
+            </div>
+              <div className="form-group">
+              <label className="form-label" htmlFor="review-name">Subject</label>
+              <input id="review-name" type="text" className="form-control" required
+                placeholder="Subject"
+                value={form.subject} onChange={e => setForm(p => ({ ...p, subject: e.target.value }))} />
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="review-text">Review</label>

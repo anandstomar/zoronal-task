@@ -522,6 +522,11 @@ img { display: block; }
   max-width: 480px;
   max-height: 92vh;
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.modal::-webkit-scrollbar {
+  display: none;
   animation: slideUp 0.25s ease;
   position: relative;
 }
@@ -595,7 +600,7 @@ img { display: block; }
 }
 
 #review-rating {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 700;
 }
 
@@ -628,7 +633,7 @@ img { display: block; }
   color: var(--text-muted);
   pointer-events: none;
 }
-textarea.form-control { resize: vertical; min-height: 90px; }
+textarea.form-control { resize: none; min-height: 90px; }
 
 .star-picker {
   display: flex;

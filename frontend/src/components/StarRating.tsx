@@ -1,5 +1,3 @@
-// StarRating is now inline in each page for direct Figma match.
-// This file kept for compatibility if needed elsewhere.
 export default function StarRating({ rating, size = 16 }: { rating: number; size?: number }) {
   return (
     <span style={{ display: 'inline-flex', gap: 2 }}>
