@@ -8,7 +8,7 @@ const API = 'http://localhost:5000/api';
 interface Company {
   _id: string;
   name: string;
-  location: string;   // state/region
+  location: string;
   city: string;
   foundedOn: string;
   logoUrl: string;
@@ -26,7 +26,6 @@ interface Review {
   createdAt: string;
 }
 
-/* ── Reusable Stars (supports half stars) ── */
 function Stars({ rating, size = 16 }: { rating: number; size?: number }) {
   return (
     <span className="stars">
@@ -52,7 +51,6 @@ function Stars({ rating, size = 16 }: { rating: number; size?: number }) {
   );
 }
 
-/* ── Star Picker ── */
 function StarPicker({ value, onChange }: { value: number; onChange: (n: number) => void }) {
   const [hovered, setHovered] = useState(0);
   return (
@@ -76,7 +74,6 @@ function StarPicker({ value, onChange }: { value: number; onChange: (n: number) 
   );
 }
 
-/* ── Add Review Modal ── */
 function AddReviewModal({ companyId, onClose, onSaved }: { companyId: string; onClose: () => void; onSaved: () => void }) {
   const [form, setForm] = useState({ fullName: '', reviewText: '', rating: 5 });
   const [loading, setLoading] = useState(false);
@@ -133,7 +130,6 @@ function AddReviewModal({ companyId, onClose, onSaved }: { companyId: string; on
   );
 }
 
-/* ── Company Details Page ── */
 export default function CompanyDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -205,11 +201,7 @@ export default function CompanyDetails() {
 
   return (
     <div className="page-content">
-      {/* <button className="back-link" onClick={() => navigate(-1)} id="back-btn">
-        <ArrowLeft size={14} /> Back
-      </button> */}
 
-      {/* Company Info Card */}
       <div className="detail-company-card" id="company-detail-card">
         <img
           src={company.logoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(company.name.split(' ').slice(0,2).map((w:string) => w[0]).join(''))}&background=1B2A4A&color=fff&size=128&bold=true&rounded=false`}
@@ -244,7 +236,6 @@ export default function CompanyDetails() {
         </div>
       </div>
 
-      {/* Reviews */}
       <div className="reviews-header">
         <span className="reviews-result-count" id="review-count-label">
           {reviews.length > 0 ? `Result Found: ${reviews.length}` : 'No reviews yet'}
@@ -275,7 +266,6 @@ export default function CompanyDetails() {
           {reviews.map(review => (
             <div key={review._id} className="review-item" id={`review-${review._id}`}>
               <div className="review-top">
-                {/* Avatar circle with initial */}
                 <div className="review-avatar" aria-label={review.fullName}>
                   {review.fullName.charAt(0).toUpperCase()}
                 </div>
@@ -304,7 +294,6 @@ export default function CompanyDetails() {
         </div>
       )}
 
-      {/* Add Review Modal */}
       {showAdd && (
         <AddReviewModal
           companyId={id!}

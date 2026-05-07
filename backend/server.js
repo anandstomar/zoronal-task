@@ -13,7 +13,6 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/reviewrate
 app.use(cors());
 app.use(express.json());
 
-// ── MongoDB Atlas connection ──
 mongoose.connect(MONGO_URI)
   .then(() => console.log(`✅ MongoDB connected → ${MONGO_URI.replace(/:([^@]+)@/, ':****@')}`))
   .catch(err => {
@@ -21,11 +20,9 @@ mongoose.connect(MONGO_URI)
     process.exit(1);
   });
 
-// ── Routes ──
 app.use('/api/companies', companyRoutes);
 app.use('/api/reviews',   reviewRoutes);
 
-// ── Health check ──
 app.get('/', (req, res) => res.json({ status: 'ok', message: 'ReviewRate API running' }));
 
 app.listen(PORT, () => {

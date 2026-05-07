@@ -8,8 +8,8 @@ const API = 'http://localhost:5000/api';
 interface Company {
   _id: string;
   name: string;
-  address: string;   // full street address
-  location: string;  // state/region
+  address: string;
+  location: string;
   city: string;
   logoUrl: string;
   description: string;
@@ -18,7 +18,6 @@ interface Company {
   reviewCount: number;
 }
 
-/* ── Star Display (supports half stars e.g. 4.5 → ★★★★½) ── */
 function Stars({ rating, size = 16 }: { rating: number; size?: number }) {
   return (
     <span className="stars">
@@ -27,9 +26,7 @@ function Stars({ rating, size = 16 }: { rating: number; size?: number }) {
         const half = !full && rating >= i - 0.5;
         return (
           <span key={i} style={{ position: 'relative', display: 'inline-block', fontSize: size, lineHeight: 1, width: `${size}px` }}>
-            {/* base: empty star */}
             <span style={{ color: 'var(--star-empty)' }}>★</span>
-            {/* overlay: filled full or half */}
             {(full || half) && (
               <span style={{
                 position: 'absolute', left: 0, top: 0,
@@ -46,7 +43,6 @@ function Stars({ rating, size = 16 }: { rating: number; size?: number }) {
   );
 }
 
-/* ── Add Company Modal ── */
 function AddCompanyModal({ onClose, onSaved }: { onClose: () => void; onSaved: () => void }) {
   const [form, setForm] = useState({
     name: '', location: '', foundedOn: '', city: '', logoUrl: '', description: ''
@@ -118,24 +114,21 @@ function AddCompanyModal({ onClose, onSaved }: { onClose: () => void; onSaved: (
   );
 }
 
-/* ── Company List Page ── */
 export default function CompanyList() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading]     = useState(true);
-  const [searchInput, setSearchInput] = useState('');    // single search field
+  const [searchInput, setSearchInput] = useState('');
   const [sort, setSort]               = useState('name');
   const [showAdd, setShowAdd]         = useState(false);
 
-  // Listen to global navbar search event
   useEffect(() => {
     const handler = (e: Event) => setSearchInput((e as CustomEvent).detail as string);
     window.addEventListener('nav-search', handler);
     return () => window.removeEventListener('nav-search', handler);
   }, []);
 
-  // Pick up ?search= from URL on mount
   useEffect(() => {
     const s = searchParams.get('search');
     if (s) setSearchInput(s);
@@ -144,11 +137,9 @@ export default function CompanyList() {
   const fetchCompanies = useCallback(async () => {
     try {
       setLoading(true);
-      // Send a SINGLE 'search' param — backend does $or across all fields
       const { data } = await axios.get<Company[]>(`${API}/companies`, {
         params: searchInput.trim() ? { search: searchInput.trim() } : {}
       });
-      // Client-side sort
       let sorted = [...data];
       if (sort === 'name')     sorted.sort((a, b) => a.name.localeCompare(b.name));
       if (sort === 'average')  sorted.sort((a, b) => b.avgRating - a.avgRating);
@@ -170,7 +161,6 @@ export default function CompanyList() {
     return `${dd}-${mm}-${yyyy}`;
   };
 
-  /* Logo fallback: generate initials-avatar with a deterministic colour */
   const logoFallback = (name: string) => {
     const colors = ['1B2A4A', '2E7D32', 'F57C00', '1565C0', '6A1FA8', 'C62828'];
     const idx    = name.charCodeAt(0) % colors.length;
@@ -180,7 +170,6 @@ export default function CompanyList() {
 
   return (
     <div className="page-content">
-      {/* Filter Section – white strip matching Figma */}
       <div className="filter-section">
         <div className="filter-bar">
           <div className="filter-field">
@@ -216,7 +205,6 @@ export default function CompanyList() {
         </div>
       </div>
 
-      {/* Results */}
       {loading ? (
         <div className="loading-wrap">
           <div className="spinner" />
@@ -243,7 +231,6 @@ export default function CompanyList() {
                 />
                 <div className="company-row-body">
                   <div className="company-row-name">{c.name}</div>
-                  {/* location = full street address */}
                   <div className="company-row-addr">
                     <MapPin size={13} style={{ color: '#7B2CBF', flexShrink: 0 }} />
                     {c.location}
@@ -274,7 +261,6 @@ export default function CompanyList() {
         </>
       )}
 
-      {/* Add Company Modal */}
       {showAdd && (
         <AddCompanyModal onClose={() => setShowAdd(false)} onSaved={fetchCompanies} />
       )}

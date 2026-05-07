@@ -3,10 +3,9 @@ const router = express.Router();
 const Review = require('../models/Review');
 const Company = require('../models/Company');
 
-// Get reviews for a company
 router.get('/company/:companyId', async (req, res) => {
   try {
-    const { sort } = req.query; // 'date', 'rating', 'relevance'
+    const { sort } = req.query;
     
     let sortQuery = { createdAt: -1 };
     if (sort === 'rating') {
@@ -22,10 +21,8 @@ router.get('/company/:companyId', async (req, res) => {
   }
 });
 
-// Add a review
 router.post('/', async (req, res) => {
   try {
-    // verify company exists
     const company = await Company.findById(req.body.companyId);
     if (!company) {
       return res.status(404).json({ message: 'Company not found' });
@@ -45,7 +42,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Like a review
 router.post('/:id/like', async (req, res) => {
   try {
     const review = await Review.findById(req.params.id);

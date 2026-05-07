@@ -3,7 +3,6 @@ const router  = express.Router();
 const Company = require('../models/Company');
 const Review  = require('../models/Review');
 
-/* ── Helper: compute avgRating + reviewCount for a company ── */
 async function withStats(company) {
   const reviews   = await Review.find({ companyId: company._id });
   const avgRating = reviews.length > 0
@@ -12,15 +11,13 @@ async function withStats(company) {
   return { ...company.toObject(), avgRating, reviewCount: reviews.length };
 }
 
-/* ── GET /api/companies  (search + filter) ── */
 router.get('/', async (req, res) => {
   try {
-    const { search } = req.query;          // single search term from frontend
+    const { search } = req.query;
 
     let query = {};
     if (search && search.trim()) {
       const re = { $regex: search.trim(), $options: 'i' };
-      // location = display address (not searchable); city = search field
       query = { $or: [{ name: re }, { city: re }] };
     }
 
@@ -32,7 +29,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-/* ── GET /api/companies/:id ── */
 router.get('/:id', async (req, res) => {
   try {
     const company = await Company.findById(req.params.id);
@@ -43,7 +39,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-/* ── POST /api/companies ── */
 router.post('/', async (req, res) => {
   try {
     const { name, address, location, city, foundedOn, logoUrl, description } = req.body;

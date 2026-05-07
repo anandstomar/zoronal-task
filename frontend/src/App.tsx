@@ -15,7 +15,6 @@ function Navbar() {
     if (location.pathname !== '/') {
       navigate(`/?search=${encodeURIComponent(query)}`);
     } else {
-      // dispatch a custom event so CompanyList can pick it up
       window.dispatchEvent(new CustomEvent('nav-search', { detail: query }));
     }
   };
@@ -23,7 +22,6 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        {/* Brand */}
         <Link to="/" className="nav-brand">
           <div className="nav-brand-icon">
             <Star size={20} fill="white" color="white" />
@@ -31,7 +29,6 @@ function Navbar() {
           <span className="brand-text">Review&amp;<b>RATE</b></span>
         </Link>
 
-        {/* Centre Search */}
         <div className="nav-search-wrap">
           <form className="nav-search" onSubmit={handleSearch}>
             <Search className="search-icon" size={17} />
@@ -45,7 +42,6 @@ function Navbar() {
           </form>
         </div>
 
-        {/* Right Actions */}
         <div className="nav-actions">
           <button className="btn-signup" id="signup-btn">SignUp</button>
           <button className="btn-login" id="login-btn">Login</button>

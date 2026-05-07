@@ -1,10 +1,6 @@
-/* ============================================
-   Review&RATE – Design System (Figma Match)
-   ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* ── CSS Variables ── */
 :root {
   --purple:         #7B2CBF;
   --purple-light:   #9B59B6;
@@ -38,7 +34,6 @@
   --transition: 0.2s ease;
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -54,14 +49,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 input, textarea, select { font-family: inherit; font-size: inherit; }
 img { display: block; }
 
-/* ── Navbar ── */
 .navbar {
   background: var(--white);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 200;
-  /* Figma: no box-shadow on navbar */
 }
 .navbar-inner {
   max-width: 1200px;
@@ -168,21 +161,17 @@ img { display: block; }
 }
 .btn-login:hover { color: var(--purple); }
 
-/* ── Page Layout ── */
 .page-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px 60px;
 }
 
-/* ── Filter Bar ── */
-/* filter-section bleeds edge-to-edge relative to page-content's horizontal padding */
 .filter-section {
   background: var(--white);
   border-bottom: 1px solid var(--border);
   padding: 22px 32px 26px;
   margin: 0 -32px 32px;
-  /* subtract page-content's side padding so it spans full width */
 }
 .filter-bar {
   display: flex;
@@ -235,7 +224,6 @@ img { display: block; }
   cursor: pointer;
 }
 
-/* ── Buttons ── */
 .btn-purple {
   padding: 9px 24px;
   background: var(--purple-gradient);
@@ -297,14 +285,12 @@ img { display: block; }
 }
 .btn-outline:hover { background: var(--purple-bg); }
 
-/* ── Result Count ── */
 .result-count {
   font-size: 13px;
   color: var(--text-secondary);
   margin-bottom: 16px;
 }
 
-/* ── Company List Card (horizontal row) ── */
 .company-list { display: flex; flex-direction: column; gap: 12px; }
 .company-row {
   background: var(--white);
@@ -370,7 +356,6 @@ img { display: block; }
   white-space: nowrap;
 }
 
-/* ── Stars ── */
 .stars {
   display: inline-flex;
   gap: 2px;
@@ -380,7 +365,6 @@ img { display: block; }
 .star-filled { color: var(--star-filled); }
 .star-empty  { color: var(--star-empty); }
 
-/* ── Company Detail Page ── */
 .detail-company-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -432,7 +416,6 @@ img { display: block; }
 }
 .detail-founded { font-size: 12px; color: var(--text-muted); }
 
-/* ── Review List ── */
 .reviews-header {
   display: flex;
   align-items: center;
@@ -518,7 +501,6 @@ img { display: block; }
   background: var(--purple-bg);
 }
 
-/* ── Modal Overlay ── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -553,7 +535,6 @@ img { display: block; }
   overflow: hidden;
   flex-shrink: 0;
 }
-/* Left large dark-purple circle */
 .modal-header-graphic::before {
   content: '';
   position: absolute;
@@ -562,7 +543,6 @@ img { display: block; }
   border-radius: 50%;
   bottom: -40px; left: -25px;
 }
-/* Right medium lighter-purple circle */
 .modal-header-graphic::after {
   content: '';
   position: absolute;
@@ -605,7 +585,6 @@ img { display: block; }
   color: var(--text-primary);
 }
 
-/* ── Form ── */
 .form-group { margin-bottom: 20px; }
 .form-label {
   display: block;
@@ -625,7 +604,6 @@ img { display: block; }
   padding: 11px 14px;
   border: 1px solid #E0E0E0;
   border-radius: var(--radius-sm);
-  /* Figma: inputs have very light gray fill */
   background: #FAFAFA;
   color: var(--text-primary);
   outline: none;
@@ -652,7 +630,6 @@ img { display: block; }
 }
 textarea.form-control { resize: vertical; min-height: 90px; }
 
-/* ── Star Picker ── */
 .star-picker {
   display: flex;
   gap: 6px;
@@ -669,7 +646,6 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 }
 .star-picker button:hover { transform: scale(1.2); }
 
-/* ── Alerts ── */
 .alert {
   padding: 10px 14px;
   border-radius: var(--radius-sm);
@@ -683,7 +659,6 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 .alert-error   { background: #FFF3F3; border: 1px solid #FECACA; color: var(--danger); }
 .alert-success { background: #F0FFF4; border: 1px solid #A7F3D0; color: var(--success); }
 
-/* ── Loading / Empty ── */
 .loading-wrap {
   display: flex;
   flex-direction: column;
@@ -713,7 +688,6 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 .empty-state h3 { font-size: 18px; color: var(--text-primary); margin-bottom: 8px; }
 .empty-state p  { margin-bottom: 20px; font-size: 14px; }
 
-/* ── Back link ── */
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -725,7 +699,6 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 }
 .back-link:hover { color: var(--purple); }
 
-/* ── Responsive ── */
 @media (max-width: 700px) {
   .nav-search-wrap { display: none; }
   .company-row { flex-wrap: wrap; }
