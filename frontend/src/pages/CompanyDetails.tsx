@@ -94,15 +94,15 @@ function AddReviewModal({ companyId, onClose, onSaved }: { companyId: string; on
   return (
     <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
       <div className="modal" role="dialog" aria-modal="true" aria-label="Add Review">
+        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         <div className="modal-header-graphic">
-          <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         </div>
         <div className="modal-body">
           <h2 className="modal-title">Add Review</h2>
           {error && <div className="alert alert-error"><X size={14} />{error}</div>}
           <form onSubmit={handleSubmit} id="add-review-form">
             <div className="form-group">
-              <label className="form-label" htmlFor="review-name">Full Name</label>
+              <label className="form-label" style={{ marginTop: "60px"}} htmlFor="review-name">Full Name</label>
               <input id="review-name" type="text" className="form-control" required
                 placeholder="Your full name"
                 value={form.fullName} onChange={e => setForm(p => ({ ...p, fullName: e.target.value }))} />
@@ -234,7 +234,7 @@ export default function CompanyDetails() {
           )}
           <button
             id="add-review-btn"
-            className="btn-purple"
+            className="btn-purple1"
             onClick={() => setShowAdd(true)}
           >
             + Add Review

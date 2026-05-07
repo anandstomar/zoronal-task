@@ -68,15 +68,15 @@ function AddCompanyModal({ onClose, onSaved }: { onClose: () => void; onSaved: (
   return (
     <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
       <div className="modal" role="dialog" aria-modal="true" aria-label="Add Company">
+        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         <div className="modal-header-graphic">
-          <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         </div>
         <div className="modal-body">
           <h2 className="modal-title">Add Company</h2>
           {error && <div className="alert alert-error"><X size={14} />{error}</div>}
           <form onSubmit={handleSubmit} id="add-company-form">
             <div className="form-group">
-              <label className="form-label" htmlFor="company-name">Company name</label>
+              <label className="form-label" style={{ marginTop: "60px"}} htmlFor="company-name">Company name</label>
               <input id="company-name" name="name" type="text" className="form-control"
                 placeholder="Enter..." value={form.name} onChange={onChange} required />
             </div>
@@ -187,10 +187,10 @@ export default function CompanyList() {
               <MapPin className="filter-input-icon" size={16} />
             </div>
           </div>
-          <button id="find-company-btn" className="btn-purple" onClick={fetchCompanies}>
+          <button id="find-company-btn" className="btn-purple1" onClick={fetchCompanies}>
             Find Company
           </button>
-          <button id="add-company-btn" className="btn-purple" onClick={() => setShowAdd(true)}>
+          <button id="add-company-btn" className="btn-purple1" onClick={() => setShowAdd(true)}>
             + Add Company
           </button>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
